@@ -19,23 +19,23 @@ export class UpdateRoomComponent implements OnInit {
     private roomService: RoomService
   ) {}
 
-  ngOnInit(): any {
+  ngOnInit(): void {
     this.room = new Room();
     this.id = this.route.snapshot.params['id'];
-    this.roomService.getRoom(this.id).subscribe(
-      (data: Room | undefined) => {
+    this.roomService.getRoom(this.id!).subscribe({
+      next: (data) => {
         console.log(data);
         this.room = data;
       },
-      (error: any) => console.log(error)
-    );
+      error: (error) => console.log(error),
+    });
   }
 
   updateRoom() {
-    this.roomService.updateRoom(this.id, this.room).subscribe(
-      (data: any) => console.log(data),
-      (error: any) => console.log(error)
-    );
+    this.roomService.updateRoom(this.id!, this.room!).subscribe({
+      next: (data) => console.log(data),
+      error: (error) => console.log(error),
+    });
     this.room = new Room();
     this.goToList();
   }

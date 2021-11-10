@@ -22,10 +22,10 @@ export class CreateRoomComponent implements OnInit {
   }
 
   save() {
-    this.roomService.createRoom(this.room).subscribe(
-      (data: any) => console.log(data),
-      (error: any) => console.log(error)
-    );
+    this.roomService.createRoom(this.room).subscribe({
+      next: (data) => console.log(data),
+      error: (error) => console.log(error),
+    });
     this.room = new Room();
     this.goToList();
   }

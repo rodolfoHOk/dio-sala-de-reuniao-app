@@ -14,22 +14,22 @@ export class RoomListComponent implements OnInit {
 
   constructor(private roomService: RoomService, private router: Router) {}
 
-  ngOnInit(): any {
+  ngOnInit(): void {
     this.reloadData();
   }
 
   reloadData() {
-    this.rooms = this.roomService.getRoomList();
+    this.rooms = this.roomService.getRoomsList();
   }
 
   deleteRoom(id: number) {
-    this.roomService.deleteRoom(id).subscribe(
-      (data: any) => {
+    this.roomService.deleteRoom(id).subscribe({
+      next: (data) => {
         console.log(data);
         this.reloadData();
       },
-      (error: any) => console.log(error)
-    );
+      error: (error) => console.log(error),
+    });
   }
 
   roomDetails(id: number) {
