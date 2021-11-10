@@ -10,7 +10,7 @@ import { RoomService } from '../room.service';
 })
 export class UpdateRoomComponent implements OnInit {
   id: number | undefined;
-  room: Room | undefined;
+  room: Room = new Room();
   submitted = false;
 
   constructor(
@@ -29,6 +29,10 @@ export class UpdateRoomComponent implements OnInit {
       },
       error: (error) => console.log(error),
     });
+  }
+
+  onSubmit() {
+    this.updateRoom();
   }
 
   updateRoom() {
