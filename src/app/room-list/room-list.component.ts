@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RoomDetailsComponent } from '../room-details/room-details.component';
 import { Observable } from 'rxjs';
 import { RoomService } from '../room.service';
 import { Room } from '../room';
@@ -11,11 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./room-list.component.css'],
 })
 export class RoomListComponent implements OnInit {
-  rooms: Observable<Room[]> = [];
+  rooms: Observable<Room[]> | undefined;
 
   constructor(private roomService: RoomService, private router: Router) {}
 
-  ngOnInit(): void {
+  ngOnInit(): any {
     this.reloadData();
   }
 
@@ -25,11 +24,11 @@ export class RoomListComponent implements OnInit {
 
   deleteRoom(id: number) {
     this.roomService.deleteRoom(id).subscribe(
-      (data) => {
+      (data: any) => {
         console.log(data);
         this.reloadData();
       },
-      (error) => console.log(error)
+      (error: any) => console.log(error)
     );
   }
 
